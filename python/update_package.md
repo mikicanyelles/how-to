@@ -1,6 +1,6 @@
 # How to update a new version of a package to GitHub and PyPI
 
-Imagine there are two branches: building and master. In `master` branches only final, uploaded versions are commited, while `building` is used to build the new versions.
+Imagine there are two branches: building and master. In `main` branches only final, uploaded versions are commited, while `building` is used to build the new versions.
 
 ## Requirements
 
@@ -12,14 +12,14 @@ Imagine there are two branches: building and master. In `master` branches only f
 
 ## Steps
 
-1. Being in `building`branch: Check that everything works in the new version.
+1. Being in `building` branch: Check that everything works in the new version.
 2. Format the code by using `black`:
   ```bash
   black .
   ```
 3. Modify the `setup.py` by changing the `version` number and the download link (keeping the chosen format for Git tags).
 4. Commit the `setup.py` changes.
-5. Change branch to `master` and merge from `building`:
+5. Change branch to `main` and merge from `building`:
   ```bash
   git checkout master
   git merge building
@@ -38,5 +38,10 @@ Imagine there are two branches: building and master. In `master` branches only f
 10. Upload new version to pypi.org:
   ```bash
   twine upload dist/*
+  ``` 
+11. Go back to `building` branch and merge from `main`. Nothing should be merged:
+  ```bash
+  git checkout building
+  git merge master
   ```
   
